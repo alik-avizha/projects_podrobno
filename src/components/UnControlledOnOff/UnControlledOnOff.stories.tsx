@@ -9,7 +9,11 @@ export default {
 }
 const callback = action('on or off clicked')
 
-export const OnOffMode = () => <UnControlledOnOff  setOn={callback}/>;
+export const OnOffMode = () => <UnControlledOnOff defaultOn={true}  setOn={callback}/>;
+export const OffMode = () => <UnControlledOnOff  defaultOn={false} setOn={callback}/>;
+export const BugMode = () => <div>Unsync when change defaultValue when already rendered</div>;
+
+export const DefaultInputValue = () => <input defaultValue={'io'}/>;
 
 
 
