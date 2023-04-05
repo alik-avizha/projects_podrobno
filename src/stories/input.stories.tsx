@@ -4,7 +4,6 @@ export default {
     title: 'input'
 };
 
-
 export const UncontrolledInput = () => <input/>
 
 export const ControlledInputWithFixedValue = () => <input value={'alo-alo'}/>

@@ -1,0 +1,8 @@
+.wrapper{
+    border: 1px solid slategray;
+    background-color: #dedfe0;
+    width: 60px;
+}
+.title{
+    font-weight: bold;
+}

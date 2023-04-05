@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Rating, RatingValueType} from './components/Rating/Rating';
-import {UnControlledOnOff} from './components/UnControlledOnOff/UnControlledOnOff';
-import UnControlledAccordion from './components/UnControlledAccordion/UnControlledAccordion';
-import {Accordion} from './components/Accordion/Accordion';
+import {RatingValueType} from './components/Rating/Rating';
+import {Select} from './components/Select/Select';
 
 function App() {
 
@@ -11,18 +9,32 @@ function App() {
     const [collapsed, setCollapsed] = useState<boolean>(true)
     const [on, setOn] = useState(false)
 
+    const [value, setValue] = useState<string>('Kiev')
+
+    const items = [
+        {value: '1', title: 'Kiev'},
+        {value: '2', title: 'Piter'},
+        {value: '3', title: 'Minsk'},
+        {value: '4', title: 'Parizh'},
+    ]
+
+    const onChangeHandler = (value: any) => {
+        setValue(value)
+    }
 
     return (
         <div className="App">
 
-            <UnControlledOnOff setOn={setOn}  /> {on.toString()}
+            <Select value={value} onChange={onChangeHandler} items={items}/>
+
+            {/*<UnControlledOnOff setOn={setOn}  /> {on.toString()}*/}
             {/*<OnOff setOn={setOn} on={on}/>*/}
 
-            <Accordion titleValue={'Menu'} setCollapsed={setCollapsed} collapsed={collapsed}/>
-            <UnControlledAccordion titleValue={'UnControlled Menu'} />
+            {/*<Accordion titleValue={'Menu'} setCollapsed={setCollapsed} collapsed={collapsed}  items={[{title: 'Aleks', value: 1}, {title: 'Ivan', value: 2}, {title: 'Igor', value: 3}]} onClick={(id)=>{alert(id)}}/>*/}
+            {/*<UnControlledAccordion titleValue={'UnControlled Menu'} />*/}
 
             {/*<UnControlledRating />*/}
-            <Rating value={ratingValue} onClick={setRatingValue}/>
+            {/*<Rating value={ratingValue} onClick={setRatingValue}/>*/}
 
          </div>
     );
