@@ -14,7 +14,6 @@ type SelectPropsType = {
 
 export const Select = (props: SelectPropsType) => {
 
-
     const [active, setActive] = useState(false)
     const [hoveredElementValue, setHoveredElementValue] = useState(props.value)
 
@@ -52,7 +51,6 @@ export const Select = (props: SelectPropsType) => {
             setActive(false)
         }
     }
-
     return (
         <div className={styles.select} onKeyUp={onKeyUp} tabIndex={0}>
             <span className={styles.main} onClick={toggleItems}>{selectedItem && selectedItem.title}</span>
