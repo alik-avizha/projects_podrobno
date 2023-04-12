@@ -1,8 +1,16 @@
-.wrapper{
-    border: 1px solid slategray;
-    background-color: #dedfe0;
-    width: 60px;
+.select span.main {
+    border: 1px solid black;
+    display: inline-block;
+    min-height: 20px;
+    min-width: 60px;
 }
-.title{
-    font-weight: bold;
+.items {
+    position: absolute;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.item.selected {
+    background-color: blue;
+    color: white;
 }
