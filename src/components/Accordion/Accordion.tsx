@@ -34,6 +34,9 @@ export function Accordion(props: AccordionPropsType) {
         </div>
     )
 }
+const AccordionTitle = React.memo(AccordionTitleSecret)
+const AccordionBody = React.memo(AccordionBodySecret)
+
 
 type AccordionTitlePropsTitle = {
     collapsed: boolean
@@ -42,7 +45,7 @@ type AccordionTitlePropsTitle = {
     color?: string
 }
 
-function AccordionTitle(props: AccordionTitlePropsTitle) {
+function AccordionTitleSecret(props: AccordionTitlePropsTitle) {
     return (
         <>
             <h3 style={{color: props.color ? props.color : 'black'}}
@@ -56,8 +59,8 @@ export type AccordionBodyType = {
     onClick: (value: any) => void
 }
 
-function AccordionBody(props: AccordionBodyType) {
-    console.log('AccordionBody rendering')
+function AccordionBodySecret(props: AccordionBodyType) {
+    console.log('AccordionBodySecret rendering')
     return (
         <>
             <ul>

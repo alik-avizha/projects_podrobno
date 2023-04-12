@@ -15,26 +15,29 @@ function UnControlledAccordion(props: AccordionPropsType) {
 
     return (
         <div>
-            {/*<AccordionTitle title={props.titleValue} collapsed={collapsed} setCollapsed={setCollapsed}/>*/}
+            {/*<AccordionTitleSecret title={props.titleValue} collapsed={collapsed} setCollapsed={setCollapsed}/>*/}
             <AccordionTitle title={props.titleValue} onClick={()=>dispatch({type: TOGGLE_COLLAPSED})}/>
             {!state.collapsed && <AccordionBody/>}
         </div>
     )
 }
 
+const AccordionTitle = React.memo(AccordionTitleSecret)
+const AccordionBody = React.memo(AccordionBodySecret)
+
 type AccordionTitlePropsTitle = {
     title: string
     onClick: () => void
 }
 
-function AccordionTitle(props: AccordionTitlePropsTitle) {
+function AccordionTitleSecret(props: AccordionTitlePropsTitle) {
     return (
             <h3 onClick={()=>props.onClick()} >--{props.title}--</h3>
     )
 }
 
-function AccordionBody() {
-    console.log('AccordionBody rendering')
+function AccordionBodySecret() {
+    console.log('AccordionBodySecret rendering')
     return (
             <ul>
                 <li>1</li>
