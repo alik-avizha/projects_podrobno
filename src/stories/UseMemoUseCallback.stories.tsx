@@ -1,5 +1,5 @@
-import React, {useMemo, useState} from 'react';
-import {Select} from '../components/Select/Select';
+import React, {useCallback, useMemo, useState} from 'react';
+import {log} from 'util';
 
 export default {
     title: 'useMemo'
@@ -13,9 +13,9 @@ export const DifficultCountingExample = () => {
     let resultA = 1;
     let resultB = 1;
 
-    resultA = useMemo(()=>{
+    resultA = useMemo(() => {
         let tempResultA = 1;
-        for (let i = 1; i <= a ; i++) {
+        for (let i = 1; i <= a; i++) {
             let fake = 0
             while (fake < 1000000) {
                 fake++
@@ -24,16 +24,16 @@ export const DifficultCountingExample = () => {
             tempResultA = tempResultA * i
         }
         return tempResultA
-    },[a])
+    }, [a])
 
-    for (let i = 1; i <= b ; i++) {
+    for (let i = 1; i <= b; i++) {
         resultB = resultB * i
     }
 
     return (
         <>
-            <input value={a} onChange={(e)=>setA(+e.currentTarget.value)}/>
-            <input value={b} onChange={(e)=>setB(+e.currentTarget.value)}/>
+            <input value={a} onChange={(e) => setA(+e.currentTarget.value)}/>
+            <input value={b} onChange={(e) => setB(+e.currentTarget.value)}/>
             <hr/>
             <div>
                 Result for a: {resultA}
@@ -42,10 +42,10 @@ export const DifficultCountingExample = () => {
                 Result for b: {resultB}
             </div>
         </>
-        )
+    )
 
 }
-const UsersSecret = (props: {users: Array<string>}) => {
+const UsersSecret = (props: { users: Array<string> }) => {
     console.log('UsersSecret')
     return <div>{props.users.map((u, i) => <div key={i}>{u}</div>)}</div>
 }
@@ -55,9 +55,9 @@ export const HelpsToReactMemo = () => {
     const [counter, setCounter] = useState(0)
     const [users, setUsers] = useState(['Alik', 'Igor', 'Artem'])
 
-    const newArr = useMemo(()=>{
-        return users.filter(u => u.toLowerCase().indexOf("a") > -1)
-    },[users])
+    const newArr = useMemo(() => {
+        return users.filter(u => u.toLowerCase().indexOf('a') > -1)
+    }, [users])
 
     const addUser = () => {
         const newUsers = [...users, 'Sveta' + new Date().getTime()]
@@ -77,17 +77,13 @@ export const HelpsToReactMemo = () => {
 //2 селект- города на букву какую-то
 //3 селект- города на c численностью больше 10000000
 //дабвить счетчик который не будет перерисовывать города, при изменение счетчика (добавить console.log)
-
 type City = {
     id: number,
     CountyId: number,
     city: string,
     countPeople: number
 }
-
 export type CountryType = City[]
-
-
 export const ExampleSelect = () => {
 
     const [count, setCount] = useState(0)
@@ -104,13 +100,13 @@ export const ExampleSelect = () => {
         {id: 9, CountyId: 3, city: 'Львов', countPeople: 2000000},
     ])
 
-    const citiesBelarus = useMemo(()=>{
+    const citiesBelarus = useMemo(() => {
         return items.filter(i => i.CountyId === 1).map(el => el.city)
-    },[items])
-    const citiesVowelO = useMemo(()=>{
+    }, [items])
+    const citiesVowelO = useMemo(() => {
         return items.filter(i => i.city.includes('а')).map(el => el.city)
-    },[items])
-    const citiesСount = useMemo(()=>{
+    }, [items])
+    const citiesСount = useMemo(() => {
         return items.filter(i => i.countPeople >= 1000000).map(el => el.city)
     }, [items])
     console.log('Changed')
@@ -120,19 +116,18 @@ export const ExampleSelect = () => {
             <SelectHelps cities={citiesBelarus}/>
             <SelectHelps cities={citiesVowelO}/>
             <SelectHelps cities={citiesСount}/>
-            <button onClick={()=>setCount(count+1)} >+</button>
+            <button onClick={() => setCount(count + 1)}>+</button>
             {count}
         </div>
-        )
+    )
 }
-
 type SelectHelps = {
     cities: string[]
 }
 const SelectSecret = (props: SelectHelps) => {
     console.log('Cities changed')
     return (
-        <select >
+        <select>
             {props.cities.map(city => (
                 <option key={city} value={city}>
                     {city}
@@ -141,9 +136,43 @@ const SelectSecret = (props: SelectHelps) => {
         </select>
     )
 }
-
 const SelectHelps = React.memo(SelectSecret)
 
 
+export const LikUseCallback = () => {
+    console.log('LikUseCallback')
+    const [counter, setCounter] = useState(0)
+    const [books, setBooks] = useState(['React', 'JS', 'CSS', 'HTML'])
 
 
+    const memoizedAddBook = useMemo(() => {
+        return () => {
+            console.log(books)
+            const newBook = [...books, 'Angular' + new Date().getTime()]
+            setBooks(newBook)
+        }
+    }, [books])
+    const memoizedAddBook2 = useCallback(() => {
+        console.log(books)
+        const newBook = [...books, 'Angular' + new Date().getTime()]
+        setBooks(newBook)
+    }, [books])
+
+    return <>
+        <button onClick={() => setCounter(counter + 1)}>+</button>
+        {counter}
+        <Book addBook={memoizedAddBook2}/>
+    </>
+}
+type BookSecretPropsType = {
+    addBook: () => void
+}
+const BooksSecret = (props: BookSecretPropsType) => {
+    console.log('Books')
+    return (
+        <div>
+            <button onClick={() => props.addBook()}>add Book</button>
+        </div>
+    )
+}
+const Book = React.memo(BooksSecret)
