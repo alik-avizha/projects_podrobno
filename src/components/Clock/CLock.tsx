@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
+import classes from "./Clock.module.css";
 
-type PropsType = {
+/*type PropsType = {
 
 }
 
@@ -31,4 +32,41 @@ export const Clock: React.FC<PropsType> = (props) => {
             <span>{get2digitsString(date.getSeconds())}</span>
         </div>
     )
-}
+}*/
+
+const get2digitsString = (num: number) => num < 10 ? "0" + num : num
+
+export const Clock = () => {
+    const [time, setTime] = useState(new Date());
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(new Date());
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const seconds = time.getSeconds();
+    const minutes = time.getMinutes();
+    const hours = time.getHours();
+
+    const secondsStyle = {
+        transform: `rotate(${seconds * 6}deg)`,
+    };
+
+    const minutesStyle = {
+        transform: `rotate(${minutes * 6}deg)`,
+    };
+
+    const hoursStyle = {
+        transform: `rotate(${hours * 30 + minutes / 2}deg)`,
+    };
+
+    return (
+        <div className={classes.clock}>
+            <div className={`${classes.hand} ${classes.hourHand}`} style={hoursStyle} />
+            <div className={`${classes.hand} ${classes.minuteHand}`} style={minutesStyle} />
+            <div className={`${classes.hand} ${classes.secondHand}`} style={secondsStyle} />
+        </div>
+    );
+};
