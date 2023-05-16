@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {RatingValueType} from './components/Rating/Rating';
 import {Select} from './components/Select/Select';
-import {Clock} from './components/Clock/CLock';
+import {AnalogClock} from './components/Clock/CLock';
 
 function App() {
 
@@ -36,7 +36,8 @@ function App() {
 
             {/*<UnControlledRating />*/}
             {/*<Rating value={ratingValue} onClick={setRatingValue}/>*/}
-            <Clock/>
+
+            {/*<AnalogClock/>*/}
 
          </div>
     );

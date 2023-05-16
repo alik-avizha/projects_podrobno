@@ -1,13 +1,13 @@
 import React from 'react';
-import {Clock} from './CLock';
+import {AnalogClock} from './CLock';
 
 export default {
     title: 'components/Clock',
-    component: Clock
+    component: AnalogClock
 }
 
 export const BaseExample = () => {
-    return <Clock />;
+    return <AnalogClock />;
 }
 
 

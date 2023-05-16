@@ -1,43 +1,41 @@
 .clock {
-    width: 300px;
-    height: 300px;
+    width: 120px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    background: #ccc;
+}
+.clock .digital-clock {
+    padding: 10px;
+}
+.clock .analog-clock {
+    width: 100px;
+    height: 100px;
+    border: solid 1px #000;
     border-radius: 50%;
-    margin: 50px auto;
     position: relative;
-    border: 20px solid #f7f7f7;
-    box-shadow: inset 0 0 0 10px #eee, inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
+    background: #fff;
 }
-
-.hand {
-    width: 50%;
-    height: 6px;
-    background: black;
+.clock .analog-clock .dial {
     position: absolute;
-    top: 50%;
-    transform-origin: 100%;
-    transform: rotate(90deg);
-    transition: all 0.05s;
-    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    transform-origin: bottom left;
 }
-
-.hourHand {
-    width: 50%;
-    height: 8px;
-    background: #333;
-    z-index: 10;
-    transform-origin: 100%;
+.clock .analog-clock .dial.seconds {
+    border-left: solid 1px green;
 }
-
-.minuteHand {
-    width: 50%;
-    height: 6px;
-    background: #333;
-    z-index: 20;
+.clock .analog-clock .dial.minutes {
+    border-left: solid 1px #cc0000;
 }
-
-.secondHand {
-    width: 50%;
-    height: 2px;
-    background: red;
-    z-index: 30;
+.clock .analog-clock .dial.hours {
+    width: 35px;
+    height: 35px;
+    top: 15px;
+    border-left: solid 2px #000;
 }

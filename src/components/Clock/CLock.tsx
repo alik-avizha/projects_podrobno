@@ -36,7 +36,7 @@ export const Clock: React.FC<PropsType> = (props) => {
 
 const get2digitsString = (num: number) => num < 10 ? "0" + num : num
 
-export const Clock = () => {
+export const AnalogClock = () => {
     const [time, setTime] = useState(new Date());
 
     useEffect(() => {
@@ -44,7 +44,7 @@ export const Clock = () => {
             setTime(new Date());
         }, 1000);
         return () => clearInterval(interval);
-    }, []);
+    }, [ ]);
 
     const seconds = time.getSeconds();
     const minutes = time.getMinutes();
@@ -64,9 +64,13 @@ export const Clock = () => {
 
     return (
         <div className={classes.clock}>
-            <div className={`${classes.hand} ${classes.hourHand}`} style={hoursStyle} />
-            <div className={`${classes.hand} ${classes.minuteHand}`} style={minutesStyle} />
-            <div className={`${classes.hand} ${classes.secondHand}`} style={secondsStyle} />
+            <div className={classes['analog-clock']}>
+                <div className={`${classes.dial} ${classes.seconds}`} style={secondsStyle} />
+                <div className={`${classes.dial} ${classes.minutes}`} style={minutesStyle} />
+                <div className={`${classes.dial} ${classes.hours}`} style={hoursStyle} />
+            </div>
+
         </div>
     );
 };
+
